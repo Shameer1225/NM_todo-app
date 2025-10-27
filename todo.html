@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-time Todo App</title>
+    <link rel="stylesheet" href="todo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Side Navbar -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="app-logo">
+                <i class="fas fa-check-double"></i>
+                <span>TodoPro</span>
+            </div>
+            <button class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <div class="nav-profile">
+            <div class="profile-image">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="profile-info">
+                <span class="profile-name">Welcome User</span>
+                <span class="profile-status">Premium Member</span>
+            </div>
+        </div>
+
+        <ul class="nav-links">
+            <li class="nav-item active">
+                <a href="#" class="nav-link" data-section="dashboard">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" data-section="tasks">
+                    <i class="fas fa-tasks"></i>
+                    <span>My Tasks</span>
+                    <span class="task-count" id="navTaskCount">0</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" data-section="analytics">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Analytics</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" data-section="categories">
+                    <i class="fas fa-folder"></i>
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" data-section="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="nav-footer">
+            <div class="upgrade-card">
+                <i class="fas fa-crown"></i>
+                <h4>Upgrade to Pro</h4>
+                <p>Get advanced features</p>
+                <button class="upgrade-btn">Upgrade Now</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <header class="main-header">
+                <div class="header-content">
+                    <h1>
+                        <i class="fas fa-tasks"></i>
+                        <span id="currentSection">Dashboard</span>
+                    </h1>
+                    <div class="header-actions">
+                        <button class="theme-toggle" id="themeToggle">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                        <div class="notification-bell">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-count">3</span>
+                        </div>
+                        <div class="user-menu">
+                            <img src="https://ui-avatars.com/api/?name=User&background=4a00e0&color=fff" alt="User">
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section class="content-section active" id="dashboard">
+                <div class="welcome-banner">
+                    <div class="banner-content">
+                        <h2>Welcome to Your Productivity Hub! 🚀</h2>
+                        <p>You have <span id="bannerActiveTasks">0</span> tasks to complete today. Keep going!</p>
+                    </div>
+                    <div class="banner-illustration">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                </div>
+
+                <div class="quick-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon total">
+                            <i class="fas fa-list"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="statTotal">0</h3>
+                            <p>Total Tasks</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon pending">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="statPending">0</h3>
+                            <p>Pending</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon completed">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="statCompleted">0</h3>
+                            <p>Completed</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon productivity">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="statProductivity">0%</h3>
+                            <p>Productivity</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tasks Section -->
+            <section class="content-section" id="tasks">
+                <div class="section-header">
+                    <h2>Task Management</h2>
+                    <p>Organize your daily tasks efficiently</p>
+                </div>
+
+                <div class="todo-input-section">
+                    <div class="input-group">
+                        <input type="text" id="todoInput" placeholder="What needs to be done?">
+                        <button id="addBtn" class="primary-btn">
+                            <i class="fas fa-plus"></i> Add Task
+                        </button>
+                    </div>
+                    <div class="filter-group">
+                        <button class="filter-btn active" data-filter="all">All Tasks</button>
+                        <button class="filter-btn" data-filter="active">Active</button>
+                        <button class="filter-btn" data-filter="completed">Completed</button>
+                        <button class="filter-btn" data-filter="priority">
+                            <i class="fas fa-flag"></i> Priority
+                        </button>
+                    </div>
+                </div>
+
+                <div class="todo-list-section">
+                    <div class="list-header">
+                        <span>Your Tasks</span>
+                        <div class="sort-options">
+                            <select id="sortSelect">
+                                <option value="newest">Newest First</option>
+                                <option value="oldest">Oldest First</option>
+                                <option value="priority">Priority</option>
+                                <option value="alphabetical">A-Z</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <ul id="todoList"></ul>
+                    
+                    <div id="emptyState" class="empty-state">
+                        <i class="fas fa-clipboard-list"></i>
+                        <h3>No tasks yet</h3>
+                        <p>Add a task above to get started</p>
+                    </div>
+                </div>
+
+                <div class="actions-section">
+                    <button id="clearCompleted" class="action-btn danger">
+                        <i class="fas fa-trash"></i> Clear Completed
+                    </button>
+                    <button id="markAllComplete" class="action-btn success">
+                        <i class="fas fa-check-double"></i> Mark All Complete
+                    </button>
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section class="content-section" id="analytics">
+                <div class="section-header">
+                    <h2>Productivity Analytics</h2>
+                    <p>Track your progress and performance</p>
+                </div>
+                
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <h3>Completion Rate</h3>
+                        <div class="completion-chart">
+                            <div class="chart-circle">
+                                <svg width="120" height="120" viewBox="0 0 120 120">
+                                    <circle cx="60" cy="60" r="54" fill="none" stroke="#e0e0e0" stroke-width="8"></circle>
+                                    <circle cx="60" cy="60" r="54" fill="none" stroke="#4a00e0" stroke-width="8" 
+                                            stroke-dasharray="339.292" stroke-dashoffset="135.717" stroke-linecap="round"></circle>
+                                </svg>
+                                <div class="chart-text">
+                                    <span id="completionRate">60%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="analytics-card">
+                        <h3>Daily Activity</h3>
+                        <div class="activity-bars">
+                            <div class="bar-container">
+                                <div class="bar-label">Mon</div>
+                                <div class="bar" style="height: 70%"></div>
+                            </div>
+                            <div class="bar-container">
+                                <div class="bar-label">Tue</div>
+                                <div class="bar" style="height: 90%"></div>
+                            </div>
+                            <div class="bar-container">
+                                <div class="bar-label">Wed</div>
+                                <div class="bar" style="height: 60%"></div>
+                            </div>
+                            <div class="bar-container">
+                                <div class="bar-label">Thu</div>
+                                <div class="bar" style="height: 80%"></div>
+                            </div>
+                            <div class="bar-container">
+                                <div class="bar-label">Fri</div>
+                                <div class="bar" style="height: 95%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sync Status -->
+            <div class="sync-status">
+                <span id="syncStatus"><i class="fas fa-sync"></i> All changes saved</span>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
